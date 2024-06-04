@@ -1471,6 +1471,15 @@ namespace SQLite
 		{
 			return WriteAsync (conn => _innerQuery.Delete ());
 		}
+
+		public Task<TableQuery<TResult>> Join<TInner, TKey, TResult> (
+			AsyncTableQuery<TInner>                   inner,
+			Expression<Func<T, TKey>>            outerKeySelector,
+			Expression<Func<TInner, TKey>>       innerKeySelector,
+			Expression<Func<T, TInner, TResult>> resultSelector) where TResult : new() where TInner : new()
+		{
+			return WriteAsync (conn => _innerQuery.Join (inner._innerQuery, outerKeySelector, innerKeySelector, resultSelector));
+		}
 	}
 
 	class SQLiteConnectionPool

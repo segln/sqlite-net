@@ -4077,10 +4077,11 @@ namespace SQLite
 
 		private SQLiteCommand GenerateCommand (string selectionList)
 		{
-			if (_joinInner != null && _joinOuter != null) {
-				throw new NotSupportedException ("Joins are not supported.");
-			}
-			else {
+			//if (_joinInner != null && _joinOuter != null) {
+			//	throw new NotSupportedException ("Joins are not supported.");
+			//}
+			//else
+            {
 				var cmdText = "select " + selectionList + " from \"" + Table.TableName + "\"";
 				var args = new List<object> ();
 				if (_where != null) {
